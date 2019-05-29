@@ -1,0 +1,209 @@
+option = {
+           tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            legend: {
+                show:false,
+                data:['总值','行','行辅助','商','商辅助','校','汇总值同比']
+            },
+            grid: {
+                top:"20%",
+                left: '3%',
+                right: '4%',
+                bottom: '10%',
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    axisLine:{
+                        lineStyle:{
+                            color:"#619bc1",
+                            width:1,
+                            type:"solid"
+                        }
+                    },
+                    axisTick:{
+                        show:false
+                    },
+                    axisLabel:{
+                        show:true,
+                        color:"#ffffff",
+                        interval: '0'
+                    },
+                    data : ['2017-04','2017-05','2017-06']
+                },
+                
+                
+            ],
+            yAxis : [
+                {
+                    show:false,
+                    type: 'value'
+                },
+                {
+                    show: false,
+                    type: 'value',
+                    min: 0,
+                    max: 25,
+                    interval: 5
+                }
+            ],
+            series : [
+                {
+                    name:'总值',
+                    type:'bar',
+                    stack:"number",
+                    label:{
+                        normal:{
+                            show:true,
+                            position:"top",
+                            color:"#ffffff"
+                        }
+
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#96dcfe'
+                        }
+                    },
+                    data:[100, 100, 100]
+                },
+                {
+                    name:'总值辅助1',
+                    type:'bar',
+                    stack:"广告1",
+                    itemStyle: {
+                        normal: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: 'rgba(0,0,0,0)'
+                        },
+                        emphasis: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: 'rgba(0,0,0,0)'
+                        }
+                    },
+                    data:[60, 60, 60]
+                },
+                {
+                    name:'行',
+                    type:'bar',
+                    stack: '广告1',
+                    itemStyle: {
+                        normal: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: '#cd6703'
+                        }
+                    },
+
+                    data:[40, 40, 40]
+                },
+
+                {
+                    name:'行辅助',
+                    type:'bar',
+                    stack:"广告2",
+                    itemStyle: {
+                        normal: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: 'rgba(0,0,0,0)'
+                        },
+                        emphasis: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: 'rgba(0,0,0,0)'
+                        }
+                    },
+                    data:[30, 30, 30]
+                },
+                {
+                    name:'商',
+                    type:'bar',
+                    stack: '广告2',
+                    itemStyle: {
+                        normal: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: '#288bf0'
+                        }
+                    },
+                    data:[30, 30, 30]
+                },
+                {
+                    name:'商辅助',
+                    type:'bar',
+                    stack:"广告3",
+                    itemStyle: {
+                        normal: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: 'rgba(0,0,0,0)'
+                        },
+                        emphasis: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: 'rgba(0,0,0,0)'
+                        }
+                    },
+                    data:[0, 0, 0]
+                },
+                {
+                    name:'校',
+                    type:'bar',
+                    stack: '广告3',
+                    itemStyle: {
+                        normal: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: '#d1b272'
+                        }
+                    },
+                    data:[30, 30, 30]
+                },
+                {
+                    name: '汇总值同比',
+                    type: 'line',
+                    // symbol: "none",
+                    xAxisIndex: 1,
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [{
+                                    offset: 0.5, color: '#007FFF' // 0% 处的颜色
+                                }, {
+                                    offset: 1, color: 'rgba(255,255,255,0)' // 100% 处的颜色
+                                }],
+                            }
+
+                        }
+
+                    },
+                    smooth: true,
+                    tooltip: {
+                        show: false,
+                        formatter: function (params) {
+
+                        }
+                    },
+
+                    data: [89.0, 2.2, 3.3]
+                }
+
+            ]
+        };
+// 增加了一个隐藏的x轴，用来控制线图的点的位置
+option.xAxis[1] = {
+    type: 'value',
+    max: option.xAxis[0].data.length * 100,
+    position:"bottom",
+    // offset:30,
+    show: true
+}
+option.series[7].data = option.series[7].data.map((x, i) => [18 + i * 100, x])
